@@ -1,13 +1,16 @@
 [package]
-name = "bit_rs"
+name = "bt"
 version = "0.1.0"
 edition = "2021"
+description = "⚡Rapid bitcoin & Crypto utils."
+readme = "README.md"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-clap = {version = "4.2", features = ["cargo", "derive", "wrap_help"] }
-# clap = "*"
+clap = {version = "3.2.15", features = ["cargo", "derive", "wrap_help"] }
+
+color-eyre = "0.6"
 lazy_static = "1.4.0"
 
 # (de)serialization
@@ -15,3 +18,10 @@ serde_derive = "1.0.79"
 serde_json = "1.0"
 serde = {version = "1.0.143", features = ["derive"] }
 clap_builder = "4.4.18"
+
+[lints.rust]
+unused_crate_dependencies = "warn"
+unused_import_braces = "warn"
+unused_lifetimes = "warn"
+unused_macro_rules = "warn"
+unused_qualifications = "warn"

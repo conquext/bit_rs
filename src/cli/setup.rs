@@ -1,13 +1,35 @@
-use std::path::PathBuf;
+use clap::Parser;
 
-use clap::{Subcommand};
-use clap_builder::Parser;
+use crate::{config::setup::Config, output::{error::Error, Message}, state::{args::{Args, Command}, wallets::Wallets}};
 
-#[allow(clippy::option_option)]
-#[derive(clap::Parser, Debug, Clone, PartialEq)]
-#[command(author, version, about, subcommand_precedence_over_arg = true)]
+#[derive(Debug, Clone)]
 pub struct Cli {
-    /// Generate a file instead of printing to stdout    
-    #[arg(short, long, group = "file_out")]
-    file: Option<Option<PathBuf>>,
+    args: Args,
+    config: Config,
+    wallets: Wallets,
+}
+
+impl Cli {
+    pub fn new(config: Config) -> Self {
+        Self {
+            args: Args::parse(),
+            config: config.clone(),
+            wallets: Wallets::load(Some(config.data_dir)),
+        }
+    }
+    
+    pub fn handle_args(&mut self) -> Result<Message, Error> {
+        match &self.args.command {  
+            Command::New { name } => {
+                // self.vaults.enter_vault(name)?;
+                // Ok(Message::VaultEntered(name.to_owned()))
+                Ok(Message::Empty)
+            },          
+            Command::List { item_type } => {
+                // self.vaults.ref_current()?.list(item_type);
+                Ok(Message::Empty)
+            },
+            _ => Ok(Message::Empty),
+        }        
+    }
 }
