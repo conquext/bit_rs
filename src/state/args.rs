@@ -10,14 +10,30 @@ pub enum Command {
         #[clap(value_parser, name = "wallet name")]
         name: String,
     },
+    /// saves the last output
+    #[clap(override_usage("bt save"))]
+    #[clap(alias = "sv")]
+    Save {
+        /// save last output in the current folder
+        #[clap(value_parser, name = "filename")]
+        path: String,
+    },
+    /// prints the last output
+    #[clap(override_usage("bt pkey"))]
+    #[clap(alias = "pk")]
+    NewPrivateKey,
+    /// prints the last output
+    #[clap(override_usage("bt print"))]
+    #[clap(alias = "_")]
+    Print,
     /// creates a new private key
     #[clap(override_usage("bt new-key"))]
     #[clap(alias = "nk")]
     NewKey,
-    /// creates a new mnemonic seed
-    #[clap(override_usage("bt new-seed"))]
-    #[clap(alias = "ns")]
-    NewSeed,
+    /// creates a new mnemonic phrase
+    #[clap(override_usage("bt new-phrase"))]
+    #[clap(alias = "np")]
+    NewPhrase,
     /// open a wallet (from the current folder)
     #[clap(alias = "op")]
     Open {

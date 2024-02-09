@@ -7,9 +7,11 @@ fn main() {
 
     let mut log_file_path = config.log_file_path.clone();
     if log_file_path.is_empty() {
-        log_file_path = "bit_rs.log".to_string();
+        log_file_path = "bit_rs.log".to_string();        
     }
-    let mut log_file = File::create(log_file_path).expect("Failed to create log file");
+    
+    #[allow(unused_variable)]
+    let log_file = File::create(log_file_path).expect("Failed to create log file");
     
     let mut cli = Cli::new(config.clone());
 
